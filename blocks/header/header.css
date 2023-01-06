@@ -1,11 +1,11 @@
 .header {
-    margin: 28px 0 0 0;
+    margin: 28px auto;
     border-bottom: 1px solid #545454;
 }
 
 @media (min-width: 1024px) {
     .header {
-        margin: 45px 200px 0 200px;
+        margin: 45px auto;
         width: 880px;
         height: 74px;
     }

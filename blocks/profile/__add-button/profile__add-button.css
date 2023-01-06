@@ -11,13 +11,18 @@
     margin-top: 35px;
     background-position: center;
     border-radius: 2px;
+    
 }
 
 @media (min-width: 880px) {
-    .profile__add-button {
-        width: 150px;
+    .profile__add-button{
+        margin-left: 50px;        
+    }
+}
+
+@media (min-width: 1280px) {
+    .profile__add-button {        
         margin-left: 244px;
-        margin-top: 8px;
-        
+        margin-top: 8px;        
     }
 }

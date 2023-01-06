@@ -11,5 +11,16 @@
     position: absolute;
     right: 0;
     top: -36px;
-    background-color: #000000;
+    background-color: transparent;
+}
+
+@media (min-width: 880px) {
+    .popup__close-button {
+        margin: 0;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        right: -36px;
+        background-image: url(../../../images/close_buttonB.svg);
+    }
 }

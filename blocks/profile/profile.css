@@ -2,10 +2,10 @@
     margin: 42px 19px 0 19px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center;    
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 880px) {
     .profile {
         margin: 40px 200px 0 200px;
         flex-direction: row;        

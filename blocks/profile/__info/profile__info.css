@@ -6,5 +6,6 @@
 @media (min-width: 880px) {
     .profile__info {
         gap: 18px;
+        min-width: 336px;
     }
 }

@@ -13,3 +13,9 @@
     margin-bottom: 0;
 }
 
+@media (min-width: 880px) {
+    .popup__input {
+        min-width: 358px;
+        margin-bottom: 20px;
+    }
+}
