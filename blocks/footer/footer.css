@@ -1,0 +1,9 @@
+.footer {
+    margin: 48px 19px 36px 19px;
+}
+
+@media (min-width: 1280px) {
+    .footer {
+        margin: 66px 200px 60px 200px;
+    }
+}

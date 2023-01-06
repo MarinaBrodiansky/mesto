@@ -1,0 +1,10 @@
+.profile__form {
+    padding: 26px 19px 0 46px;
+}
+
+@media (min-width: 1280px) {
+    .profile__form {
+        padding: 0 0 0 30px;
+        align-items: left;
+    }
+}

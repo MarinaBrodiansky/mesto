@@ -1,0 +1,12 @@
+.header {
+    margin: 28px 0 0 0;
+    border-bottom: 1px solid #545454;
+}
+
+@media (min-width: 1024px) {
+    .header {
+        margin: 45px 200px 0 200px;
+        width: 880px;
+        height: 74px;
+    }
+}
