@@ -7,7 +7,14 @@
 
 @media (min-width: 880px) {
     .profile {
-        margin: 40px 200px 0 200px;
-        flex-direction: row;        
+        margin: 40px 100px 0 100px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 1280px) {
+    .profile {
+        margin: 40px 200px 0 200px;                
     }
 }

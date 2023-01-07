@@ -1,6 +1,6 @@
 .element__image {
-    max-width: 282px;
-    max-height: 361px;
+    width: 282px;
+    height: 361px;
     object-fit: cover;
     display: block;
     border-radius: 10px 10px 0 0;

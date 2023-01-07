@@ -1,12 +1,17 @@
 .header {
     margin: 28px auto;
-    border-bottom: 1px solid #545454;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 880px) {
     .header {
         margin: 45px auto;
-        width: 880px;
-        height: 74px;
+        max-width: 880px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .header {
+        margin: 45px 200px 0 200px;
     }
 }

@@ -14,6 +14,10 @@
     background-color: transparent;
 }
 
+.popup__close-button:hover{
+    opacity: 0.5;
+}
+
 @media (min-width: 880px) {
     .popup__close-button {
         margin: 0;

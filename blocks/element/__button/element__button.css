@@ -7,5 +7,9 @@
     background-color: #ffffff;
     cursor: pointer;
     border: none;
-    margin-top: 5px;    
+    margin-top: 5px;   
+}
+
+.element__button:hover{
+    opacity: 0.5;
 }

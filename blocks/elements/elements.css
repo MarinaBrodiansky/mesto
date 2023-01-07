@@ -4,7 +4,14 @@
     margin: 36px 19px 0 19px;
     padding: 0;
     gap: 20px;
-    justify-items: center;
+    justify-items: center;       
+}
+
+@media (min-width: 880px) {
+    .elements {
+        margin: 45px 50px 0 50px;
+        gap: 20px 17px;           
+    }
 }
 
 @media (min-width: 1280px) {
