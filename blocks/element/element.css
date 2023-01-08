@@ -2,6 +2,5 @@
     display: flex;
     flex-direction: column;
     max-width: 282px;
-    border-radius: 10px;
-    max-height: 362px; 
+    border-radius: 10px;    
 }
