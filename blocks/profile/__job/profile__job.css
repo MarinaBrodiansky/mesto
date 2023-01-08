@@ -9,6 +9,7 @@
     white-space: nowrap;
     overflow: hidden;
     max-width: 189px;
+    justify-content: center;
 }
 
 @media (min-width: 1280px) {
@@ -17,5 +18,6 @@
         line-height: 21.78px;
         padding: 0;
         max-width: 336px;
+        justify-content: start;
     }
 }
