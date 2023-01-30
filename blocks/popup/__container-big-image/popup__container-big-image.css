@@ -1,0 +1,16 @@
+.popup__container-big-image {
+    width: 100%;
+    max-width: 240px;    
+    background: transparent;    
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  
+  @media (min-width: 880px) {
+    .popup__container-big-image {
+      min-width: 433px;
+      max-width: 816px;
+    }
+  }

@@ -19,77 +19,74 @@
                 <div class="profile__form">         
                     <div class="profile__info">
                     <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-                    <button class="profile__edit-button" type="button"></button>
+                    <button class="profile__edit-button" type="button" aria-label="кнопка редактировать"></button>
                     </div>                
                     <p class="profile__job">Исследователь океана</p>
                 </div>
             </div>           
-            <button class="profile__add-button" type="button"></button>
+            <button class="profile__add-button" type="button" aria-label="кнопка добавить"></button>
         </section>
         
         <section class="elements">
-            <div class="element">
-                <img src="./images/karachaevsk.png" alt="изображение Карачаевска" class="element__image">
-                <div class="element__wrap">
-                    <h2 class="element__title">Карачаевск</h2>
-                    <button class="element__button" type="button"></button>
-                </div>                
-            </div>
-            <div class="element">
-                <img src="./images/elbrus.png" alt="изображение Эльбруса" class="element__image">
-                <div class="element__wrap">
-                    <h2 class="element__title">Гора Эльбрус</h2>
-                    <button class="element__button" type="button"></button>
-                </div>                
-            </div>
-            <div class="element">
-                <img src="./images/dombay.png" alt="изображение Домбая" class="element__image">
-                <div class="element__wrap">
-                    <h2 class="element__title">Домбай</h2>
-                    <button class="element__button" type="button"></button>
-                </div>                
-            </div>
-            <div class="element">
-                <img src="./images/elbrus.png" alt="изображение Эльбруса" class="element__image">
-                <div class="element__wrap">
-                    <h2 class="element__title">Гора Эльбрус</h2>
-                    <button class="element__button" type="button"></button>
-                </div>                
-            </div>
-            <div class="element">
-                <img src="./images/dombay.png" alt="изображение Домбая" class="element__image">
-                <div class="element__wrap">
-                    <h2 class="element__title">Домбай</h2>
-                    <button class="element__button" type="button"></button>
-                </div>                
-            </div>
-            <div class="element">
-                <img src="./images/karachaevsk.png" alt="изображение Карачаевска" class="element__image">
-                <div class="element__wrap">
-                    <h2 class="element__title">Карачаево-Черкессия</h2>
-                    <button class="element__button" type="button"></button>
-                </div>                
-            </div>
-        </section>        
+            <div class="elements__list">                           
+
+            </div>           
+        </section>
+
     </main>
 
     <footer class="footer">        
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
 
-    <section class="popup">
+    <!--попап редактировать профиль-->
+    <section class="popup popup_type_edit-profile">
         <div class="popup__container">
             <button type="button" class="popup__close-button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" name="popup__form">
+            <form class="popup__form popup__form_edit" name="popup__form">
                 <input class="popup__input popup__input_value_user-name" type="text" placeholder="Ваше имя" name="profile__user-name">
                 <input class="popup__input popup__input_value_job" type="text" placeholder="Род деятельности" name="profile__job">
-                <button type="submit" class="popup__submit-button">Сохранить</button>
+                <button type="submit" class="popup__submit-button" aria-label="кнопка сохранить">Сохранить</button>
             </form>
         </div>
     </section>
 
+    <!--попап добавить картинку-->
+    <section class="popup popup_type_add-element">
+        <div class="popup__container">
+            <button type="button" class="popup__close-button" aria-label="кнопка закрыть окно"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form popup__form_add" name="popup__form">
+                <input class="popup__input popup__input_value_element-name" type="text" placeholder="Название" name="element-name">
+                <input class="popup__input popup__input_value_element-link" type="text" placeholder="Ссылка на картинку" name="element-link">
+                <button type="submit" class="popup__submit-button" area-label="кнопка создать">Создать</button>
+            </form>
+        </div>
+    </section>
+
+    <!--попап картинки-->
+    <section class="popup popup_type_big-image">
+        <div class="popup__container-big-image">
+            <button class="popup__close-button" type="button" area-label="кнопка закрыть окно"></button>
+            <img class="popup__element-image" src="#" alt="#">              
+            <p class="popup__element-title"></p>            
+        </div>
+    </section>
+
+    <!--темплейт карточки-->
+    <template id="element__template">
+        <div class="element">
+            <button class="element__trash" type="button" area-label="кнопка удалить элемент"></button>
+            <img src="#" alt="фото" class="element__image">            
+            <div class="element__wrap">
+                <h2 class="element__title"></h2>
+                <button class="element__like-button" type="button"></button>
+            </div>                
+        </div>
+    </template>
+
     <script src="./scripts/index.js"></script>
-    
+        
 </body>
 </html>

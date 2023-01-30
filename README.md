@@ -6,7 +6,7 @@
 •	Flex-layout
 •	Grid-layout
 •	Использована методология БЭМ
-•	Java Script (реализован Popup)
+•	Java Script (реализован Popup, загрузка элементов из массива, добавление элементов по ссылке, удаление элементов, лайки)
 
 
 https://marinabrodiansky.github.io/mesto/
