@@ -30,16 +30,13 @@ const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddElement = document.querySelector('.popup_type_add-element');
 const popupBigImage = document.querySelector('.popup_type_big-image');
 
-
 //кнопка открыть
 const editProfileOpenButton = document.querySelector('.profile__edit-button');
 const addElementOpenButton = document.querySelector('.profile__add-button');
 const bigImageOpenButton = document.querySelector('.element');
 
-
-//кнопка закрыть
-const popupCloseButton = document.querySelectorAll('.popup__close-button');
-
+//кнопки закрыть
+const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 
 //редактировать профиль
 const profileUserName = document.querySelector('.profile__user-name');
@@ -47,7 +44,6 @@ const profileJob = document.querySelector('.profile__job');
 const popupFormEdit = document.querySelector('.popup__form_edit');
 const nameInput = document.querySelector('.popup__input_value_user-name');
 const jobInput = document.querySelector('.popup__input_value_job');
-
 
 //добавить картинку
 const popupFormAdd = document.querySelector('.popup__form_add');
@@ -60,7 +56,7 @@ const bigImageTitle = popupBigImage.querySelector('.popup__element-title');
 
 //карточки
 const elementsList = document.querySelector('.elements__list');
-
+const elementTemplate = document.querySelector('#element__template').content;
 
 //открыть попап
 function openPopup(popup) {
@@ -81,8 +77,7 @@ function editHandleFormSubmit (evt) {
 }
 
 //создать элемент
-function createElement(name, link) {
-    const elementTemplate = document.querySelector('#element__template').content;
+function createElement(name, link) {    
     const elements = elementTemplate.querySelector('.element').cloneNode(true);
     const elementImage = elements.querySelector('.element__image');
     const elementTitle = elements.querySelector('.element__title');
@@ -141,14 +136,14 @@ addElementOpenButton.addEventListener('click', function () {
 });
 
 //закрыть попап
-    popupCloseButton.forEach((button) => {
+    popupCloseButtons.forEach((button) => {
     button.addEventListener('click', () => {
     closePopup(button.closest('.popup'))
     });    
 })
 
 //закрыть по сабмиту
-popupEditProfile.addEventListener('submit', editHandleFormSubmit);
+popupFormEdit.addEventListener('submit', editHandleFormSubmit);
 popupAddElement.addEventListener('submit', addHandleFormSubmit);
 
 
