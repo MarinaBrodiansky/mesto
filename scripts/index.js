@@ -29,7 +29,7 @@ const initialCards = [
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddElement = document.querySelector('.popup_type_add-element');
 const popupBigImage = document.querySelector('.popup_type_big-image');
-const popups = document.querySelectorAll('.popup');
+//const popups = document.querySelectorAll('.popup');
 
 //кнопка открыть
 const editProfileOpenButton = document.querySelector('.profile__edit-button');
@@ -147,7 +147,7 @@ function addHandleFormSubmit (evt) {
 editProfileOpenButton.addEventListener('click', function () {
     openPopup(popupEditProfile);
     nameInput.value = profileUserName.textContent;
-    jobInput.value = profileJob.textContent;
+    jobInput.value = profileJob.textContent;    
 });
 
 addElementOpenButton.addEventListener('click', function () {
