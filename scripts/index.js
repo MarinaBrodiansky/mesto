@@ -29,6 +29,7 @@ const initialCards = [
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddElement = document.querySelector('.popup_type_add-element');
 const popupBigImage = document.querySelector('.popup_type_big-image');
+const popups = document.querySelectorAll('.popup');
 
 //кнопка открыть
 const editProfileOpenButton = document.querySelector('.profile__edit-button');
@@ -66,6 +67,24 @@ function openPopup(popup) {
 //закрыть попап
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+};
+
+//закрыть попап по Esc
+function closePopupEsc(evt) {
+  if (evt.key ==='Escape') {    
+    const popupOpened = document.querySelector('.popup_opened')
+    if (popupOpened) {
+      closePopup(popupOpened)
+    }
+  }
+};
+
+// закрыть попап по Overlay
+function closePopupOverlay(evt) {
+  const popupOpened = document.querySelector('.popup_opened')
+  if(evt.target === popupOpened) {
+    closePopup(popupOpened)
+  }
 };
 
 //submit
@@ -146,8 +165,11 @@ addElementOpenButton.addEventListener('click', function () {
 popupFormEdit.addEventListener('submit', editHandleFormSubmit);
 popupAddElement.addEventListener('submit', addHandleFormSubmit);
 
+//закрыть по Esc
+document.addEventListener('keydown', closePopupEsc);
 
-
+//Закрыть по Overlay
+document.addEventListener('mousedown', closePopupOverlay);
 
 
     
