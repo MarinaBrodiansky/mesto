@@ -1,6 +1,6 @@
 .popup__container-big-image {
     /* width: fit-content; */
-    max-width: 75vw;    
+    max-width: 75vw;
     background: transparent;
     display: flex;
     flex-direction: column;
