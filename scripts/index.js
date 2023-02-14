@@ -1,35 +1,35 @@
 const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
 //попапы
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddElement = document.querySelector('.popup_type_add-element');
 const popupBigImage = document.querySelector('.popup_type_big-image');
-//const popups = document.querySelectorAll('.popup');
+const popups = document.querySelectorAll('.popup');
 
 //кнопка открыть
 const editProfileOpenButton = document.querySelector('.profile__edit-button');
@@ -48,8 +48,8 @@ const jobInput = document.querySelector('.popup__input_value_job');
 
 //добавить картинку
 const popupFormAdd = document.querySelector('.popup__form_add');
-const ElementNameInput = document.querySelector('.popup__input_value_element-name');
-const ElementLinkInput = document.querySelector('.popup__input_value_element-link');
+const elementNameInput = document.querySelector('.popup__input_value_element-name');
+const elementLinkInput = document.querySelector('.popup__input_value_element-link');
 
 //картинка
 const bigImageLink = popupBigImage.querySelector('.popup__element-image');
@@ -61,17 +61,20 @@ const elementTemplate = document.querySelector('#element__template').content;
 
 //открыть попап
 function openPopup(popup) {
-    popup.classList.add('popup_opened');
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc);
 };
 
 //закрыть попап
 function closePopup(popup) {
-    popup.classList.remove('popup_opened');
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
+  //popup.removeEventListener('mousedown', closePopupOverlay);
 };
 
 //закрыть попап по Esc
 function closePopupEsc(evt) {
-  if (evt.key ==='Escape') {    
+  if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened')
     if (popupOpened) {
       closePopup(popupOpened)
@@ -80,99 +83,107 @@ function closePopupEsc(evt) {
 };
 
 // закрыть попап по Overlay
-function closePopupOverlay(evt) {
-  const popupOpened = document.querySelector('.popup_opened')
-  if(evt.target === popupOpened) {
-    closePopup(popupOpened)
-  }
-};
+popups.forEach((evt) =>
+  evt.addEventListener('mousedown', function (evt) {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(evt.target);
+    }
+  })
+);
 
 //submit
-function editHandleFormSubmit (evt) {
-    evt.preventDefault();
-    profileUserName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-    closePopup(popupEditProfile);    
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileUserName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  closePopup(popupEditProfile);
 }
 
 //создать элемент
-function createElement(name, link) {    
-    const elements = elementTemplate.querySelector('.element').cloneNode(true);
-    const elementImage = elements.querySelector('.element__image');
-    const elementTitle = elements.querySelector('.element__title');
-    const elementLikeButton = elements.querySelector('.element__like-button');
-    const elementTrashButton = elements.querySelector('.element__trash');
+function createElement(name, link) {
+  const elements = elementTemplate.querySelector('.element').cloneNode(true);
+  const elementImage = elements.querySelector('.element__image');
+  const elementTitle = elements.querySelector('.element__title');
+  const elementLikeButton = elements.querySelector('.element__like-button');
+  const elementTrashButton = elements.querySelector('.element__trash');
 
-    elementTitle.textContent = name;    
-    elementImage.src = link;
-    elementImage.alt = name;
+  elementTitle.textContent = name;
+  elementImage.src = link;
+  elementImage.alt = name;
 
-    //лайки
-    elementLikeButton.addEventListener('click', (evt) => {
-        evt.target.classList.toggle('element__like-button_active');
-      });
-    
-    //корзина
-    elementTrashButton.addEventListener('click', function (evt) {
-        evt.target.closest('.element').remove();
-    });
+  //лайки
+  elementLikeButton.addEventListener('click', (evt) => {
+    evt.target.classList.toggle('element__like-button_active');
+  });
 
-    //открытие попапа картинки
-    elementImage.addEventListener('click', function() {
-        openPopup(popupBigImage);
-        bigImageTitle.textContent = name;
-        bigImageTitle.alt = name;
-        bigImageLink.src = link;
-    });    
+  //корзина
+  elementTrashButton.addEventListener('click', function (evt) {
+    evt.target.closest('.element').remove();
+  });
 
-    return elements;
+  //открытие попапа картинки
+  elementImage.addEventListener('click', function () {
+    openPopup(popupBigImage);
+    bigImageTitle.textContent = name;
+    bigImageLink.alt = name;
+    bigImageLink.src = link;
+  });
+
+  return elements;
 }
 
-function renderElement (name, link) {
-    elementsList.prepend(createElement(name, link));
+function renderElement(name, link) {
+  elementsList.prepend(createElement(name, link));
 }
 
 
 initialCards.forEach(element => renderElement(element.name, element.link, element.name));
 
-function addHandleFormSubmit (evt) {
-    evt.preventDefault();
-    elementsList.prepend(createElement(ElementNameInput.value, ElementLinkInput.value));
-    evt.target.reset();
-    closePopup(popupAddElement);
+function addHandleFormSubmit(evt) {
+  evt.preventDefault();
+  elementsList.prepend(createElement(elementNameInput.value, elementLinkInput.value));
+  evt.target.reset();
+
+  const submitButton = evt.target.querySelector('.popup__submit-button');
+  submitButton.disabled = true;
+  submitButton.classList.add('popup__submit-button_disabled');
+
+  closePopup(popupAddElement);
 }
 
 //слушатели
 //открыть попап
 editProfileOpenButton.addEventListener('click', function () {
-    openPopup(popupEditProfile);
-    nameInput.value = profileUserName.textContent;
-    jobInput.value = profileJob.textContent;    
+  openPopup(popupEditProfile);
+  nameInput.value = profileUserName.textContent;
+  jobInput.value = profileJob.textContent;
 });
 
 addElementOpenButton.addEventListener('click', function () {
-    openPopup(popupAddElement);
+  openPopup(popupAddElement);
 });
 
 //закрыть попап
-    popupCloseButtons.forEach((button) => {
-    button.addEventListener('click', () => {
+popupCloseButtons.forEach((button) => {
+  button.addEventListener('click', () => {
     closePopup(button.closest('.popup'))
-    });    
-})
+  });
+});
 
 //закрыть по сабмиту
-popupFormEdit.addEventListener('submit', editHandleFormSubmit);
+popupFormEdit.addEventListener('submit', handleProfileFormSubmit);
 popupAddElement.addEventListener('submit', addHandleFormSubmit);
 
 //закрыть по Esc
-document.addEventListener('keydown', closePopupEsc);
+
 
 //Закрыть по Overlay
-document.addEventListener('mousedown', closePopupOverlay);
+//popupAddElement.addEventListener('mousedown', closePopupOverlay);
+//popupEditProfile.addEventListener('mousedown', closePopupOverlay);
+//popupBigImage.addEventListener('mousedown', closePopupOverlay);
 
 
-    
+
 
 
 
