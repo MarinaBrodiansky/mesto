@@ -86,6 +86,3 @@ const formValidationConfig = {
   };
   
     enableValidation(formValidationConfig);
-  
-  
-  

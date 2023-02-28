@@ -1,29 +1,9 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+//import { formValidationConfig, FormValidator } from "./FormValidator.js";
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import { formValidationConfig, initialCards } from "./constants.js";
+
+
 
 //попапы
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -100,48 +80,50 @@ function handleProfileFormSubmit(evt) {
 }
 
 //создать элемент
-function createElement(name, link) {
-  const elements = elementTemplate.querySelector('.element').cloneNode(true);
-  const elementImage = elements.querySelector('.element__image');
-  const elementTitle = elements.querySelector('.element__title');
-  const elementLikeButton = elements.querySelector('.element__like-button');
-  const elementTrashButton = elements.querySelector('.element__trash');
+// function createElement(name, link) {
+//   const elements = elementTemplate.querySelector('.element').cloneNode(true);
+//   const elementImage = elements.querySelector('.element__image');
+//   const elementTitle = elements.querySelector('.element__title');
+//   const elementLikeButton = elements.querySelector('.element__like-button');
+//   const elementTrashButton = elements.querySelector('.element__trash');
 
-  elementTitle.textContent = name;
-  elementImage.src = link;
-  elementImage.alt = name;
+//   elementTitle.textContent = name;
+//   elementImage.src = link;
+//   elementImage.alt = name;
 
-  //лайки
-  elementLikeButton.addEventListener('click', (evt) => {
-    evt.target.classList.toggle('element__like-button_active');
-  });
+//   //лайки
+//   elementLikeButton.addEventListener('click', (evt) => {
+//     evt.target.classList.toggle('element__like-button_active');
+//   });
 
-  //корзина
-  elementTrashButton.addEventListener('click', function (evt) {
-    evt.target.closest('.element').remove();
-  });
+//   //корзина
+//   elementTrashButton.addEventListener('click', function (evt) {
+//     evt.target.closest('.element').remove();
+//   });
 
-  //открытие попапа картинки
-  elementImage.addEventListener('click', function () {
-    openPopup(popupBigImage);
-    bigImageTitle.textContent = name;
-    bigImageLink.alt = name;
-    bigImageLink.src = link;
-  });
+//   //открытие попапа картинки
+  
+//   return elements;
+// }
 
-  return elements;
+
+function openGalleryPopup (name, link) {
+  openPopup(popupBigImage);
+  bigImageTitle.textContent = name;
+  bigImageLink.alt = name;
+  bigImageLink.src = link;
+};
+
+function renderElement(name, link, callback) {
+  const newCard = new Card({name, link}, '#element__template', callback).generateCard();
+  elementsList.prepend(newCard);
 }
 
-function renderElement(name, link) {
-  elementsList.prepend(createElement(name, link));
-}
+initialCards.forEach(element => renderElement(element.name, element.link, openGalleryPopup));
 
-
-initialCards.forEach(element => renderElement(element.name, element.link, element.name));
-
-function addHandleFormSubmit(evt) {
+function handleAddFormSubmit(evt) {
   evt.preventDefault();
-  elementsList.prepend(createElement(elementNameInput.value, elementLinkInput.value));
+  renderElement(elementNameInput.value, elementLinkInput.value, openGalleryPopup)
   evt.target.reset();
 
   const submitButton = evt.target.querySelector('.popup__submit-button');
@@ -172,7 +154,7 @@ popupCloseButtons.forEach((button) => {
 
 //закрыть по сабмиту
 popupFormEdit.addEventListener('submit', handleProfileFormSubmit);
-popupAddElement.addEventListener('submit', addHandleFormSubmit);
+popupAddElement.addEventListener('submit', handleAddFormSubmit);
 
 //закрыть по Esc
 
@@ -182,7 +164,14 @@ popupAddElement.addEventListener('submit', addHandleFormSubmit);
 //popupEditProfile.addEventListener('mousedown', closePopupOverlay);
 //popupBigImage.addEventListener('mousedown', closePopupOverlay);
 
+// Валидаторы
 
+
+const popupFormEditValidator = new FormValidator(formValidationConfig, popupFormEdit);
+popupFormEditValidator.enableValidation();
+
+const popupFormAddValidator = new FormValidator(formValidationConfig, popupFormAdd);
+popupFormAddValidator.enableValidation();
 
 
 
