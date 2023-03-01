@@ -1,9 +1,9 @@
 export default class Card {
-    constructor(data, templateSelector, callback) {
+    constructor(data, templateSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
-        this._callback = callback;
+        this._handleCardClick = handleCardClick;
     }
 
     //получаем шаблон
@@ -46,7 +46,7 @@ export default class Card {
         this._like.addEventListener('click', (evt) => {
             evt.target.classList.toggle('element__like-button_active');
         });
-        this._image.addEventListener('click', () => { this._callback(this._name, this._link) })
+        this._image.addEventListener('click', () => { this._handleCardClick(this._name, this._link) })
     }
 
 }

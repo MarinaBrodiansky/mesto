@@ -35,31 +35,28 @@ export default class FormValidator {
   };
 
   _setEventListeners = () => {
-
-    this._toggleButtonState();
-    // formElement.addEventListener('reset', () => {
-    //   // `setTimeout` нужен для того, чтобы дождаться очищения формы (вызов уйдет в конце стэка) и только потом вызвать `toggleButtonState`
-    //   setTimeout(() => {
-    //     toggleButtonState(inputList, buttonElement, config);
-    //   }, 0); // достаточно указать 0 миллисекунд, чтобы после `reset` уже сработало действие
-    // });
+    //this._toggleButtonState();
+    this._formElement.addEventListener('reset', () => {
+      // `setTimeout` нужен для того, чтобы дождаться очищения формы (вызов уйдет в конце стэка) и только потом вызвать `toggleButtonState`
+      setTimeout(() => {
+        this._toggleButtonState();
+      }, 0); // достаточно указать 0 миллисекунд, чтобы после `reset` уже сработало действие
+       
+    });
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState();
+        this._toggleButtonState();        
       });
     });
   };
 
   enableValidation = () => {
-    // const formList = Array.from(document.querySelectorAll(config.formSelector));
-    // formList.forEach((_formElement) => {
-      this._formElement.addEventListener('submit', (evt) => {
+      this._formElement.addEventListener('submit', function (evt) {
         evt.preventDefault();
       });
-      this._setEventListeners();
-    // });
+      this._setEventListeners();     
   };
 
   _hasInvalidInput = () => {
@@ -77,6 +74,14 @@ export default class FormValidator {
     this._buttonElement.disabled = true;
     this._buttonElement.classList.add(this._inactiveButtonClass);
   };
+
+  resetValidation() {
+    this._toggleButtonState();
+
+    this._inputList.forEach((inputElement) =>{
+      this._hideInputError(inputElement);
+    });    
+  }
 
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
