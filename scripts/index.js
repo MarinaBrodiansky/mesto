@@ -99,7 +99,7 @@ function handleAddFormSubmit(evt) {
   evt.preventDefault();
   renderElement(elementNameInput.value, elementLinkInput.value, openGalleryPopup)
   evt.target.reset();
-
+  closePopup(popupAddElement) 
 }
 
 // Валидаторы
