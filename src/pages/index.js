@@ -1,7 +1,13 @@
-//import { formValidationConfig, FormValidator } from "./FormValidator.js";
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
-import { formValidationConfig, initialCards } from "./constants.js";
+import './../pages/index.css';
+
+//imports
+import Card from "../scripts/Card.js";
+import FormValidator from "../scripts/FormValidator.js";
+import { formValidationConfig, initialCards } from "../scripts/constants.js";
+import Section from "../scripts/Section.js";
+import PopupWithImage from "../scripts/PopupWithImage.js";
+import PopupWithForm from "../scripts/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 //попапы
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -43,8 +49,7 @@ function openPopup(popup) {
 //закрыть попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupEsc);
-  //popup.removeEventListener('mousedown', closePopupOverlay);
+  document.removeEventListener('keydown', closePopupEsc);  
 };
 
 //закрыть попап по Esc
@@ -69,20 +74,23 @@ popups.forEach((popup) =>
   })
 );
 
+//создание экземпляра класса userInfo
+const userInfo = new UserInfo({nameSelector: '.profile__user-name', aboutSelector: '.profile__job'});
+
 //submit
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileUserName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup(popupEditProfile);
+function handleProfileFormSubmit(data) {
+  console.log(data, 'DATA');
+  console.log(data["profile__user-name"], 'DATA');
+  userInfo.setUserInfo(data["profile__user-name"], data["profile__job"]);
+  popupProfile.close();
 }
 
-function openGalleryPopup (name, link) {
-  openPopup(popupBigImage);
-  bigImageTitle.textContent = name;
-  bigImageLink.alt = name;
-  bigImageLink.src = link;
-};
+//создане экземпляра класса PopupWithForm
+const popupProfile = new PopupWithForm({popupSelector: '.popup_type_edit-profile', handleFormSubmit: handleProfileFormSubmit});
+popupProfile.setEventListeners();
+
+//создание экземпляра класса PopupWithImage
+const popupWithImage = new PopupWithImage('.popup_type_big-image');
 
 function createCard(name, link, handleCardClick) {
   const cardElement = new Card({name, link}, '#element__template', handleCardClick).generateCard()
@@ -93,16 +101,20 @@ function renderElement(name, link, handleCardClick) {
   elementsList.prepend( createCard(name, link, handleCardClick) );
 }
 
-initialCards.forEach(element => renderElement(element.name, element.link, openGalleryPopup));
+//создание экземпляра класса Section
+const section = new Section({items: initialCards, renderer: renderElement}, '.elements__list', popupWithImage.open);
+section.renderItems();
 
-function handleAddFormSubmit(evt) {
-  evt.preventDefault();
-  renderElement(elementNameInput.value, elementLinkInput.value, openGalleryPopup)
-  evt.target.reset();
-  closePopup(popupAddElement) 
+function handleAddFormSubmit(data) {
+  renderElement(data["element-name"], data["element-link"], popupWithImage.open)
+  popupAddCard.close(); 
 }
 
-// Валидаторы
+//создане экземпляра класса PopupWithForm
+const popupAddCard = new PopupWithForm({popupSelector: '.popup_type_add-element', handleFormSubmit: handleAddFormSubmit});
+popupAddCard.setEventListeners();
+
+//Валидаторы
 const popupFormEditValidator = new FormValidator(formValidationConfig, popupFormEdit);
 popupFormEditValidator.enableValidation();
 
@@ -122,22 +134,3 @@ addElementOpenButton.addEventListener('click', function () {
   popupFormAddValidator.resetValidation();
   openPopup(popupAddElement);
 });
-
-//закрыть по сабмиту
-popupFormEdit.addEventListener('submit', handleProfileFormSubmit);
-popupAddElement.addEventListener('submit', handleAddFormSubmit);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
