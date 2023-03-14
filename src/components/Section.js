@@ -1,15 +1,13 @@
 export default class Section {
-    constructor({ items, renderer }, containerSelector, handleCardClick) {
+    constructor({ items, renderer }, containerSelector) {
         this._initialItems = items;
         this._renderer = renderer;
-        this._handleCardClick = handleCardClick;
         this._container = document.querySelector(containerSelector);
     }
 
     renderItems() {
         this._initialItems.forEach((item) => {
-            this._renderer(item.name, item.link,() => {
-                this._handleCardClick(item.name, item.link)});
+            this._renderer(item.name, item.link);
         })
     }
 

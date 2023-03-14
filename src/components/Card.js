@@ -42,6 +42,7 @@ export default class Card {
     _setEventListener = () => {
         this._trash.addEventListener('click', () => {
             this._element.remove();
+            this._element = null;
         });
         this._like.addEventListener('click', (evt) => {
             evt.target.classList.toggle('element__like-button_active');
