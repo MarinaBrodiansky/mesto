@@ -14,7 +14,10 @@
     <main class="content">
         <section class="profile">
             <div class="profile__container">
-                <img src="<%=require('./images/kusto_avatar.jpg')%>" alt="изображение Жака-Ива Кусто" class="profile__avatar">
+                <button class="profile__avatar-container">
+                    <img src="<%=require('./images/kusto_avatar.jpg')%>" alt="изображение Жака-Ива Кусто" class="profile__avatar">
+                </button>
+                
                 <div class="profile__form">         
                     <div class="profile__info">
                     <h1 class="profile__user-name">Жак-Ив Кусто</h1>
@@ -107,7 +110,7 @@
 
                 <span class="popup__error" id="element-link-error"></span>
 
-                <button type="submit" class="popup__submit-button" area-label="кнопка создать">Создать</button>
+                <button type="submit" class="popup__submit-button" aria-label="кнопка сохранить">Сохранить</button>    
             </form>
         </div>
     </section>
@@ -121,14 +124,50 @@
         </div>
     </section>
 
-    <!--темплейт карточки-->
+    <!--попап вы уверены?-->
+    <section class="popup popup_type_confirm">
+        <div class="popup__container">
+            <button class="popup__close-button" type="button" area-label="кнопка закрыть окно"></button>
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button type="submit" class="popup__submit-button" area-label="кнопка да">Да</button>
+        </div>
+    </section>
+
+    <!--попап сменить аватар-->
+    <section class="popup popup_type_change-avatar">
+        <div class="popup__container popup__container-avatar">
+            <button type="button" class="popup__close-button" aria-label="кнопка закрыть окно"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form class="popup__form popup__form_avatar" name="popup__form" novalidate>
+                
+                <input
+                required
+                class="popup__input popup__input_value_element-link"
+                placeholder="Ссылка на картинку"
+                name="avatar"
+                type="url"
+                id="avatar"
+                >
+                
+                <span class="popup__error" id="avatar-error"></span>
+
+                <button type="submit" class="popup__submit-button" aria-label="кнопка сохранить">Сохранить</button>
+            </form>
+        </div>
+    </section>
+
+     <!--темплейт карточки-->
     <template id="element__template">
         <div class="element">
             <button class="element__trash" type="button" area-label="кнопка удалить элемент"></button>
             <img src="#" alt="фото" class="element__image">            
             <div class="element__wrap">
                 <h2 class="element__title"></h2>
-                <button class="element__like-button" type="button"></button>
+                <div class="element__like-container">
+                    <button class="element__like-button" type="button"></button>
+                    <span class="element__like-count">0</span>
+                </div>
+                
             </div>                
         </div>
     </template>
