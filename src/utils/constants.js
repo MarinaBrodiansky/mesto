@@ -63,4 +63,7 @@ export const bigImageTitle = popupBigImage.querySelector('.popup__element-title'
 //карточки
 export const elementsList = document.querySelector('.elements__list');
 export const elementTemplate = document.querySelector('#element__template').content;
+
+//аватар
+export const popupFormAvatar = document.querySelector('.popup__form_avatar');
   

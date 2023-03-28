@@ -3,9 +3,13 @@ import './../pages/index.css';
 //imports
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import { formValidationConfig, initialCards, popupEditProfile, popupAddElement, popupBigImage, popups, editProfileOpenButton, addElementOpenButton, 
-  bigImageOpenButton, profileUserName, profileJob, popupFormEdit, nameInput, jobInput, popupFormAdd,
-  elementNameInput, elementLinkInput, bigImageLink, bigImageTitle, elementsList, elementTemplate } from "../utils/constants.js";
+import { formValidationConfig, initialCards, popupEditProfile, 
+  popupAddElement, popupBigImage, popups, editProfileOpenButton, 
+  addElementOpenButton, bigImageOpenButton, profileUserName, 
+  profileJob, popupFormEdit, nameInput, jobInput, popupFormAdd,
+  elementNameInput, elementLinkInput, bigImageLink, bigImageTitle, 
+  elementsList, elementTemplate, popupFormAvatar} 
+  from "../utils/constants.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -22,7 +26,7 @@ const api = new Api ({
   }
 })
 
-// загрузка юзера
+//загрузка юзера
 let user, section;
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then((res) => {
@@ -33,7 +37,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   })
   .catch((err) => console.log(`Ошибка: ${err}`))
 
-// удаление карточки
+//удаление карточки
 const handleCardDeleteClick = (deleteCardFunc, cardId) => {
   api.deleteCard(cardId)
     .then((res) => {
@@ -43,7 +47,7 @@ const handleCardDeleteClick = (deleteCardFunc, cardId) => {
     .catch((err) => console.log(`Ошибка: ${err}`))
 }
 
-// лайк
+//лайк
 const handleLikeClick = (cardId, colorLike, changeLikeCounter) => {
   api.likeCard(cardId)
     .then((res) => {
@@ -116,7 +120,7 @@ function createCard(data) {
 }
 
 function renderElement(data) {
-  elementsList.prepend( createCard(data) );
+  section.addItem(createCard(data))
 }
 
 function handleAddFormSubmit(data) {
@@ -141,6 +145,10 @@ popupFormEditValidator.enableValidation();
 const popupFormAddValidator = new FormValidator(formValidationConfig, popupFormAdd);
 popupFormAddValidator.enableValidation();
 
+const popupFormAvatarValidator = new FormValidator(formValidationConfig, popupFormAvatar);
+popupFormAvatarValidator.enableValidation();
+
+
 //слушатели
 //открыть попап
 editProfileOpenButton.addEventListener('click', function () {
@@ -154,3 +162,8 @@ addElementOpenButton.addEventListener('click', function () {
   popupFormAddValidator.resetValidation();
   popupAddCard.open();
 });
+
+openAvatarPopupButton.addEventListener('click', function() {
+  popupFormAvatarValidator.resetValidation();
+  popupAvatar.open();
+})
