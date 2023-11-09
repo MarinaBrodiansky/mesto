@@ -12,5 +12,5 @@
 6.	Использована методология БЭМ
 7.  Проект собран с помощью webpack
 
-##GitHub Pages
+## GitHub Pages
 https://marinabrodiansky.github.io/mesto/
