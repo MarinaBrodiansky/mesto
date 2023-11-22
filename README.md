@@ -13,4 +13,4 @@
 7.  Проект собран с помощью webpack
 
 ## GitHub Pages
-https://marinabrodiansky.github.io/mesto/
+https://MarinaBrodiansky.github.io/mesto/
